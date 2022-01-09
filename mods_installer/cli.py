@@ -40,6 +40,7 @@ class ModDownloaderCLI:
         parser = self.make_parser()
         args = parser.parse_args()
         if hasattr(args, "func"):
+            print()
             args.func(args)
         else:
             parser.print_help()

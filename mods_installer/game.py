@@ -31,7 +31,6 @@ class Game:
         return data
 
     def install_mod(self, mod:Mod):
-        print()
         self.register_mod_info(mod)
         self.config.mods_ids.append(mod.id)
         self.config.mods_ids = list(set(self.config.mods_ids))
@@ -66,7 +65,9 @@ class Game:
         if len(self.config.mods_ids) == 0:
             print("nothing to update")
         else:
-            for mod_id in self.config.mods_ids:
+            #TODO: bad
+            ids = list(self.config.mods_ids)
+            for mod_id in ids:
                 self.install_mod_from_query(mod_id)
 
     def render_log(self):
