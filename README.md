@@ -1,4 +1,5 @@
-A small handy application for installing mods from steam workshop
+A small handy application for installing mods from steam workshop.  
+Without authorization and api keys (instead it uses [this](https://steamworkshopdownloader.io/) downloader under the hood).
 
 ### What can do
 * install, update, remove, print mods
