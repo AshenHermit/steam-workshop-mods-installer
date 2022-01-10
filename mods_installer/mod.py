@@ -19,6 +19,8 @@ class Mod(JSONExportable):
         self.game_name = ""
         self.game_id = -1
         self.size = -1
+        self.related_files = []
+        self.related_dirs = []
 
     def download_into(self, directory:Path):
         url = self.zip_file_url

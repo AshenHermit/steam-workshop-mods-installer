@@ -1,3 +1,4 @@
+from os import stat
 from typing import List
 import requests
 import urllib.parse
@@ -71,30 +72,44 @@ class SteamWorkshopDownloaderIOApI():
         return file_url
 
 class ModLoader:
+    """
+    note: not just common mod loader, but steam mod loader, because of reading id from url
+    """
     def __init__(self) -> None:
         pass
 
     def fetch_mod_with_id(self, id:int) -> Mod:
         return Mod(id)
 
-    def fetch_mod_from_url(self, url:int) -> Mod:
+    @staticmethod
+    def get_mod_id_from_url(url:str):
         query = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
         id = query.get("id", None)
         if id is None: return None
         id = id[0]
         id = json.loads(id)
+        return id
+
+    @staticmethod
+    def get_mod_id_from_query(query):
+        id = -1
+        query = str(query)
+        try:
+            if query.startswith("http"):
+                id = ModLoader.get_mod_id_from_url(query)
+            else:
+                id = int(query)
+        except: pass
+        return id
+
+    def fetch_mod_from_url(self, url:str) -> Mod:
+        id = self.get_mod_id_from_url(url)
         return self.fetch_mod_with_id(id)
 
     def fetch_mod_from_query(self, query):
-        query = str(query)
-        if query.startswith("http"):
-            url = query
-            mod = self.fetch_mod_from_url(url)
-        else:
-            try:
-                id = int(query)
-                mod = self.fetch_mod_with_id(id)
-            except: pass
+        mod_id = self.get_mod_id_from_query(query)
+        if mod_id == -1: return None
+        mod = self.fetch_mod_with_id(mod_id)
         if mod is None: print(f"failed to fetch mod identified as {query}")
         return mod
 
