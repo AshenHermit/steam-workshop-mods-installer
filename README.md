@@ -28,11 +28,13 @@ downloading "2590814089_aom_zed_animation.raw.download.zip"...
 unpacking...
 ssuucceessffuullyy installed <Mod 2590814089 - "AoM zed animation" for game "Project Zomboid" - 23.28 Mb>
 ```
+
 This will update mods registered in config file:
 ```
 > smod update
 ...
 ```
+
 This will remove mods files and folders:
 ```
 > smod remove 2553733512
@@ -40,6 +42,12 @@ This will remove mods files and folders:
 removing <Mod 2553733512 - "Soul Filcher's Turning Time" for game "Project Zomboid" - 0.36 Mb>...
 100%|████████████████████████████████████████████████████████████████████| 20/20 [00:00<00:00, 1539.45it/s, poster.png]
 removed.
+```
+
+You can also remove all registered mods with:
+```
+> smod remove-all
+...
 ```
 
 This will print some info about mods:
